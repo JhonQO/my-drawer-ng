@@ -1,0 +1,35 @@
+<ActionBar>
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Search"></Label>
+</ActionBar>
+
+<GridLayout class="page__content">
+    <Label class="page__content-icon fas" text="&#xf002;"></Label>
+    <Label class="page__content-placeholder" text="Las Noticias de esta semana: "></Label>
+    <StackLayout>
+        <RadDataForm [source]="album">
+            <TKEntityProperty tkDataFormProperty name="albumName" displayName="Name of Album" index="0"></TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="bandName" displayName="Name of Band" index="1"></TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="year" displayName="Release Year" index="2"></TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="myRating" displayName="My Rating" index="3"></TKEntityProperty>
+            <TKEntityProperty tkDataFormProperty name="owned" displayName="Do I Own This?" index="4"></TKEntityProperty>
+        </RadDataForm>
+    </StackLayout>
+</GridLayout>
+
+<StackLayout class="page__content">
+
+    <Label class="page__content-icon fas" text="&#xf002;"></Label>
+    <Label class="page__content-placeholder" *ngFor="let s of this.noticias.buscar()" [text]="s"></Label>
+</StackLayout>
